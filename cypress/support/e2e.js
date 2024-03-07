@@ -16,5 +16,20 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+//retira o xhr requests logs
+const app = window.top
+if (!app.document.head.querySelector('[data-hide-command-log-request]')){
+    const style = app.document.createElement('style');
+    style.innerHTML = '.command-name-request, comand-name-xhr { display: none }',
+    style.setAttribute('data-hide-log-request', '')
+
+    app.document.head.appendChild(style);
+};
+
+// Retornar false para impedir que o Cypress encerre o teste para o tipo de erro exception
+Cypress.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
